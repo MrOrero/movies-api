@@ -9,8 +9,12 @@ export class UsersService {
         @InjectModel('User') private readonly userModel: Model<IUser>,
     ) {}
 
-    find(email: string) {
+    findOne(email: string) {
         return this.userModel.findOne({ email });
+    }
+
+    findById(id: string) {
+        return this.userModel.findById(id);
     }
 
     create(user: Partial<IUser>) {

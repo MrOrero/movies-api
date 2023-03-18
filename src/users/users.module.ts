@@ -1,9 +1,10 @@
-import { Module } from '@nestjs/common';
+import { MiddlewareConsumer, Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
 import { AuthService } from './auth.service';
 import { UsersController } from './users.controller';
 import { UsersService } from './users.service';
 import { UserSchema } from './models/user.model';
+import { CurrentUserMiddleware } from './middlewares/current-user.middleware';
 
 @Module({
     imports: [
@@ -12,4 +13,8 @@ import { UserSchema } from './models/user.model';
     controllers: [UsersController],
     providers: [UsersService, AuthService],
 })
-export class UsersModule {}
+export class UsersModule {
+    configure(consumer: MiddlewareConsumer) {
+        consumer.apply(CurrentUserMiddleware).forRoutes('*');
+    }
+}

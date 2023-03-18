@@ -13,8 +13,7 @@ export class AuthService {
 
     async signup(email: string, password: string, username: string) {
         // See if email is in use
-        const user = await this.usersService.find(email);
-        console.log(user);
+        const user = await this.usersService.findOne(email);
         if (user) {
             throw new BadRequestException('Email already in use');
         }
@@ -35,7 +34,7 @@ export class AuthService {
     }
 
     async signin(email: string, password: string) {
-        const existingUser = await this.usersService.find(email);
+        const existingUser = await this.usersService.findOne(email);
         if (!existingUser) {
             throw new NotFoundException('User not found');
         }

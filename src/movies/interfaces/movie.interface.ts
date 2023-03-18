@@ -1,8 +1,8 @@
-import { Document } from 'mongoose';
+import { Document, Types } from 'mongoose';
 
 export interface IMovie extends Document {
     readonly title: string;
     readonly overview: string;
     readonly releaseDate: string;
-    readonly ratings: number;
+    ratings: { rating: number; user: string }[];
 }
