@@ -1,6 +1,6 @@
 import { Expose } from 'class-transformer';
 
-export class ReportDto {
+export class MovieDto {
     @Expose()
     id: number;
 
